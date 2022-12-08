@@ -1,13 +1,19 @@
 app.component('kassalijst', {
     template:
         ` <div class="col-12 col-lg-8 offset-lg-2 d-flex flex-column justify-content-center align-items-center vh-100 text-white">
-            
+                <div class="shadow-lg p-3 mb-5 bg-dark rounded w-100 bg-opacity-75 border border-white border-5 d-flex justify-content-between">
+                     <p class="my-0 fs-3">Ingave</p>
+                      <input class="form-control w-50" type="text" placeholder="Product ...">
+                       <input class="form-control w-25" type="number" min="1" step="0.01" placeholder="Prijs ...">
+                        <button class="btn btn-dark border border-5 border-white">Add</button>
+                 </div>    
+                <div class="border border-5 border-dark border-opacity-75 w-100 mb-5"></div>
              <div v-for="product in producten" :class="[product.purchased ? checkedClass : uncheckedClass]">
                  <p class="my-0 fs-3 w-25">{{product.article}}</p>
                  <div class="d-flex align-items-center w-100">
                     <!--<p class="my-0 fs-3 pe-5">{{product.quantity}}</p>-->
                   
-                       <input @change="checkPositiveNumber(product)" class="form-control w-50" type="number" min="1" step="1" v-model="product.quantity">
+                       <input @change="checkPositiveNumber(product)" class="form-control w-50" type="number" min="1" step="0.01" v-model="product.quantity">
                   
                     <p class="my-0 ms-auto fs-3 pe-5">&euro; {{product.price.toFixed(2)}}</p>   
                     <p class="my-0 fs-3 pe-5">&euro; {{(product.quantity * product.price).toFixed(2)}}</p>      
