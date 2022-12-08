@@ -7,7 +7,7 @@ app.component('kassalijst', {
                  <div class="d-flex align-items-center w-100">
                     <!--<p class="my-0 fs-3 pe-5">{{product.quantity}}</p>-->
                   
-                       <input class="form-control w-50" type="number" min="1" step="1" v-model="product.quantity">
+                       <input @change="checkPositiveNumber(product)" class="form-control w-50" type="number" min="1" step="1" v-model="product.quantity">
                   
                     <p class="my-0 ms-auto fs-3 pe-5">&euro; {{product.price.toFixed(2)}}</p>   
                     <p class="my-0 fs-3 pe-5">&euro; {{(product.quantity * product.price).toFixed(2)}}</p>      
@@ -27,21 +27,21 @@ app.component('kassalijst', {
                 article:'Brood',
                 price: 3.20,
                 purchased: false,
-                quantity:0
+                quantity:1
             },
                 {
                     productId:2,
                     article:'Vlees',
                     price: 5.90,
                     purchased: false,
-                    quantity:0
+                    quantity:1
                 },
                 {
                     productId:3,
                     article:'Groenten',
                     price: 15.00,
                     purchased: false,
-                    quantity:0
+                    quantity:1
                 },
             ],
             selectedProducts:[],
@@ -53,6 +53,11 @@ app.component('kassalijst', {
     methods:{
         togglePurchased(product){
             product.purchased = !product.purchased
+        },
+        checkPositiveNumber(product){
+            if(product.quantity < 1){
+                product.quantity = 1
+            }
         }
     },
     computed: {
