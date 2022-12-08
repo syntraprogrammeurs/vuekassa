@@ -1,11 +1,16 @@
 app.component('kassalijst', {
     template:
-        ` <div class="col-12 col-lg-6 offset-lg-3 d-flex flex-column justify-content-center align-items-center vh-100 text-white">
+        ` <div class="col-12 col-lg-8 offset-lg-2 d-flex flex-column justify-content-center align-items-center vh-100 text-white">
             
              <div v-for="product in producten" :class="[product.purchased ? checkedClass : uncheckedClass]">
-                 <p class="my-0 fs-3">{{product.article}}</p>
-                 <div class="d-flex align-items-center">
-                    <p class="my-0 fs-3 pe-5">&euro; {{product.price.toFixed(2)}}</p>            
+                 <p class="my-0 fs-3 w-25">{{product.article}}</p>
+                 <div class="d-flex align-items-center w-100">
+                    <!--<p class="my-0 fs-3 pe-5">{{product.quantity}}</p>-->
+                  
+                       <input class="form-control w-50" type="number" min="1" step="1" v-model="product.quantity">
+                  
+                    <p class="my-0 ms-auto fs-3 pe-5">&euro; {{product.price.toFixed(2)}}</p>   
+                    <p class="my-0 fs-3 pe-5">&euro; {{(product.quantity * product.price).toFixed(2)}}</p>      
                     <input @change="togglePurchased(product)" class="form-check-input fs-3 border border-danger rounded-circle m-0" type="checkbox" v-model="selectedProducts" :value="product">
                 </div>      
              </div>          
@@ -22,18 +27,21 @@ app.component('kassalijst', {
                 article:'Brood',
                 price: 3.20,
                 purchased: false,
+                quantity:0
             },
                 {
                     productId:2,
                     article:'Vlees',
                     price: 5.90,
                     purchased: false,
+                    quantity:0
                 },
                 {
                     productId:3,
                     article:'Groenten',
                     price: 15.00,
                     purchased: false,
+                    quantity:0
                 },
             ],
             selectedProducts:[],
@@ -50,13 +58,13 @@ app.component('kassalijst', {
     computed: {
             totalPrice(){
                 let total=0
-
                 for(let p of this.selectedProducts) {
-                    total += p.price
+                    total += (p.price * p.quantity)
                 }
                 console.log(this.selectedProducts)
                 return total;
         },
+
 
     }
 })
