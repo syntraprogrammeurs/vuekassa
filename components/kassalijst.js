@@ -12,7 +12,7 @@ app.component('kassalijst', {
                     <input @change="checkPositiveNumber(product)" class="form-control w-50" type="number" min="1" step="1" v-model="product.quantity">
                     <p class="my-0 ms-auto fs-3 pe-5">&euro; {{product.price.toFixed(2)}}</p>   
                     <p class="my-0 fs-3 pe-5">&euro; {{(product.quantity * product.price).toFixed(2)}}</p>      
-                    <input @change="togglePurchased(product)" class="form-check-input fs-3 border border-danger rounded-circle m-0" type="checkbox" v-model="selectedProducts" :value="product">
+                    <input @change="togglePurchased(product)" class="form-check-input fs-3 border rounded-circle m-0" type="checkbox" v-model="selectedProducts" :value="product">
                 </div>      
              </div>          
              <div class="shadow-lg p-3 mb-5 bg-dark rounded w-100 bg-opacity-75 border border-white border-5 d-flex justify-content-between">
